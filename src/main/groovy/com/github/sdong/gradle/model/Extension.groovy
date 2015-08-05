@@ -1,4 +1,4 @@
-package com.github.sdong.gradle.coverity.model
+package com.github.sdong.gradle.model
 
 /**
  * The base extension that contains settings to be applied to all child projects
@@ -6,11 +6,11 @@ package com.github.sdong.gradle.coverity.model
  *
  * @author sdong
  */
-class CoverityExtension {
+class Extension {
     /**
      * The name that should be given when creating this extension.
      */
-    static String EXTENSION_NAME = 'coverity'
+    static String EXTENSION_NAME = 'coverity_fortify'
 
     /**
      * Specifies if the current project's child projects should be included.

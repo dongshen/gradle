@@ -1,7 +1,7 @@
-package com.github.sdong.gradle.fortify.tasks
+package com.github.sdong.gradle.tasks
 
-import com.github.sdong.gradle.coverity.internal.EmitConfig
-import com.github.sdong.gradle.coverity.internal.EmitConfigSet
+import com.github.sdong.gradle.config.CovEmitConfig
+import com.github.sdong.gradle.config.CovEmitConfigSet
 import com.github.sdong.gradle.util.Utils
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
@@ -15,7 +15,7 @@ import org.gradle.api.tasks.TaskAction
  *
  * @author sdong
  */
-class ForTranslationJavaTask extends DefaultTask {
+class ForTransJavaTask extends DefaultTask {
     /**
      * Specifies any additonal arguments to be passed to <i>each</i> external
      * <code>sourceanalyzer</code> execution.
@@ -26,7 +26,7 @@ class ForTranslationJavaTask extends DefaultTask {
      * Creates a new {@link CovEmitJavaTask}, setting its description and placing
      * it under the 'Coverity' group.
      */
-    ForTranslationJavaTask() {
+    ForTransJavaTask() {
         group = 'Fortify'
         description = 'Runs sourceanalyzer (once per source set for Java ' +
                 'projects, once per variant for Android projects), which ' +
@@ -38,13 +38,13 @@ class ForTranslationJavaTask extends DefaultTask {
     }
 
     /**
-     * Task action that builds an {@link EmitConfigSet} for this task's project,
-     * then executes <code>cov-emit-java</code> for each {@link EmitConfig}.
+     * Task action that builds an {@link CovEmitConfigSet} for this task's project,
+     * then executes <code>cov-emit-java</code> for each {@link CovEmitConfig}.
      */
     @SuppressWarnings('GroovyUnusedDeclaration')
     @TaskAction
     void translation() {
-        for (EmitConfig emitConfig : new EmitConfigSet(project).emitConfigs) {
+        for (CovEmitConfig emitConfig : new CovEmitConfigSet(project).emitConfigs) {
             // Remove source dirs that do not exist, otherwise cov-emit-java will throw an error
             for (Iterator<File> i = emitConfig.sourceDirs.iterator(); i.hasNext();) {
                 File f = i.next();

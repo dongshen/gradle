@@ -1,4 +1,4 @@
-package com.github.sdong.gradle.coverity.internal
+package com.github.sdong.gradle.config
 
 import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.BasePlugin
@@ -13,12 +13,12 @@ import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.plugins.JavaPluginConvention
 
 /**
- * A set of {@link EmitConfig}s for a given project that is populated when
+ * A set of {@link CovEmitConfig}s for a given project that is populated when
  * constructing this type.
  *
  * @author sdong
  */
-class EmitConfigSet {
+class CovEmitConfigSet {
     /**
      * The base project for this set.
      */
@@ -33,15 +33,15 @@ class EmitConfigSet {
      * Emit configs for base project and all its child projects (recursively),
      * which are created during population.
      */
-    Set<EmitConfig> emitConfigs
+    Set<CovEmitConfig> emitConfigs
 
     /**
-     * Initializes and populates a new set of {@link EmitConfig}s for the given
+     * Initializes and populates a new set of {@link CovEmitConfig}s for the given
      * {@link Project}.
      *
      * @param baseProject project to get a set of emit configs for
      */
-    EmitConfigSet(Project baseProject) {
+    CovEmitConfigSet(Project baseProject) {
         this.baseProject = baseProject
         populatedProjects = []
         emitConfigs = []
@@ -50,7 +50,7 @@ class EmitConfigSet {
     }
 
     /**
-     * Recursively populates {@link EmitConfig}s for the given project, skipping
+     * Recursively populates {@link CovEmitConfig}s for the given project, skipping
      * those specified in their extension.  When skipped, child projects are
      * still evaluated unless it is also specified that they should not be
      * included.
@@ -87,7 +87,7 @@ class EmitConfigSet {
     }
 
     /**
-     * Populates the {@link EmitConfig}s for a Java project (no child projects).
+     * Populates the {@link CovEmitConfig}s for a Java project (no child projects).
      * One config is created per {@link org.gradle.api.tasks.SourceSet} that has
      * a Java compilation task that is part of the <code>assemble</code> task.
      *
@@ -100,7 +100,7 @@ class EmitConfigSet {
             boolean inAssemble = taskDependenciesContainsTask(project.tasks.assemble, compileJavaTask, true)
 
             if (inAssemble) {
-                emitConfigs += new EmitConfig().with {
+                emitConfigs += new CovEmitConfig().with {
                     it.sourceDirs += sourceSet.allSource.srcDirs
                     it.compilerOutputDirs += sourceSet.output.files
                     it.classpath += sourceSet.compileClasspath
@@ -112,7 +112,7 @@ class EmitConfigSet {
     }
 
     /**
-     * Populates the {@link EmitConfig}s for an Android project (no child
+     * Populates the {@link CovEmitConfig}s for an Android project (no child
      * projects).  One config is created per {@link BaseVariantData} that is of
      * the <code>debug</code> build type and not a test variant.
      * <p/>
@@ -145,7 +145,7 @@ class EmitConfigSet {
                 continue
             }
 
-            EmitConfig emitConfig = new EmitConfig()
+            CovEmitConfig emitConfig = new CovEmitConfig()
 
             variantData.variantConfiguration.sortedSourceProviders.each { sourceProvider ->
                 emitConfig.sourceDirs += sourceProvider.javaDirectories

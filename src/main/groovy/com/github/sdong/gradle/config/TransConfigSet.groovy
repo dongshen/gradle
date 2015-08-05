@@ -100,7 +100,7 @@ class TranslationConfigSet {
             boolean inAssemble = taskDependenciesContainsTask(project.tasks.assemble, compileJavaTask, true)
 
             if (inAssemble) {
-                emitConfigs += new EmitConfig().with {
+                translationConfigs += new TranslationConfig().with {
                     it.sourceDirs += sourceSet.allSource.srcDirs
                     it.compilerOutputDirs += sourceSet.output.files
                     it.classpath += sourceSet.compileClasspath
@@ -145,33 +145,33 @@ class TranslationConfigSet {
                 continue
             }
 
-            EmitConfig emitConfig = new EmitConfig()
+            TranslationConfig translationConfig = new TranslationConfig()
 
             variantData.variantConfiguration.sortedSourceProviders.each { sourceProvider ->
-                emitConfig.sourceDirs += sourceProvider.javaDirectories
+                translationConfig.sourceDirs += sourceProvider.javaDirectories
             }
 
-            emitConfig.sourceDirs +=
+            translationConfig.sourceDirs +=
                     variantData.generateRClassTask.sourceOutputDir
-            emitConfig.sourceDirs +=
+            translationConfig.sourceDirs +=
                     variantData.generateBuildConfigTask.sourceOutputDir
-            emitConfig.sourceDirs +=
+            translationConfig.sourceDirs +=
                     variantData.aidlCompileTask.sourceOutputDir
 
             if (!variantData.variantConfiguration.renderscriptNdkModeEnabled) {
-                emitConfig.sourceDirs +=
+                translationConfig.sourceDirs +=
                         variantData.renderscriptCompileTask.sourceOutputDir
             }
 
-            emitConfig.compilerOutputDirs +=
+            translationConfig.compilerOutputDirs +=
                     variantData.javaCompileTask.outputs.files.files
 
-            emitConfig.classpath +=
+            translationConfig.classpath +=
                     variantData.javaCompileTask.classpath
-            emitConfig.classpath +=
+            translationConfig.classpath +=
                     project.files(plugin.androidBuilder.bootClasspath)
 
-            emitConfigs += emitConfig
+            translationConfig += translationConfig
         }
     }
 

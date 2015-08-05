@@ -31,15 +31,15 @@ dependencies {
 }
 
 pluginBundle {
-    website = 'https://github.com/mjdetullio/gradle-coverity-plugin'
-    vcsUrl = 'https://github.com/mjdetullio/gradle-coverity-plugin'
+    website = 'https://github.com/shendong/CoverityFortify-plugin'
+    vcsUrl = 'https://github.com/shendong/CoverityFortify-plugin'
     description = project.description
     tags = ['coverity', 'java', 'android']
 
     plugins {
         coverityPlugin {
-            id = 'com.github.mjdetullio.gradle.coverity'
-            displayName = 'Gradle Coverity Plugin'
+            id = 'com.github.sdong.gradle.coverityfortify'
+            displayName = 'Gradle Coverity & Fortify Plugin'
         }
     }
 }

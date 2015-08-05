@@ -1,14 +1,14 @@
-package com.github.sdong.gradle.coverity.model
+package com.github.sdong.gradle.model
 
 import org.gradle.api.Project
 
 /**
  * The extension that is applied to the project that applies the
- * {@link com.github.sdong.gradle.coverity.CoverityPlugin}.
+ * {@link com.github.sdong.gradle.CoverityFortifyPlugin}.
  *
  * @author sdong
  */
-class CoverityRootExtension extends CoverityExtension {
+class FortifyRootExtension extends Extension {
     /**
      * Specifies the directory Coverity uses during emit/analyze/commit.
      * <p/>
@@ -83,7 +83,7 @@ class CoverityRootExtension extends CoverityExtension {
      * @param project project this extension is applied to, which is used to
      *                default the {@link #intermediateDir}.
      */
-    CoverityRootExtension(Project project) {
+    FortifyRootExtension(Project project) {
         intermediateDir = "${project.buildDir}/coverity/intermediate"
         coverityHome = System.getenv('COVERITY_HOME')
         stream = System.getenv('COVERITY_STREAM')

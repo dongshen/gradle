@@ -1,4 +1,4 @@
-package com.github.sdong.gradle.coverity.tasks
+package com.github.sdong.gradle.tasks
 
 import com.github.sdong.gradle.util.Utils
 import org.gradle.api.DefaultTask
