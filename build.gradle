@@ -12,8 +12,8 @@ buildscript {
 apply plugin: 'groovy'
 apply plugin: 'com.gradle.plugin-publish'
 
-group = 'com.github.shendong.gradle'
-version = '1.0.0'
+group = 'com.github.dongshen.gradle'
+version = '1.0.0-SNAPSHOT'
 
 description = 'A plugin for integrating with Coverity & Fortify. ' +
         'For Coverity, adds tasks to the project that will emit, analyze and commit data.' +
@@ -38,7 +38,7 @@ pluginBundle {
 
     plugins {
         coverityPlugin {
-            id = 'com.github.sdong.gradle.CoverityFortifyPlugin'
+            id = 'com.github.dongshen.gradle.CoverityFortifyPlugin'
             displayName = 'Gradle Coverity & Fortify Plugin'
         }
     }
