@@ -1,4 +1,4 @@
-package com.github.sdong.gradle.util
+package com.github.sdong.gradle.coverityfortify.util
 
 /**
  * Utility class containing static methods.

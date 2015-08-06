@@ -1,8 +1,8 @@
-package com.github.sdong.gradle.tasks
+package com.github.sdong.gradle.coverityfortify.tasks
 
-import com.github.sdong.gradle.config.CovEmitConfig
-import com.github.sdong.gradle.config.CovEmitConfigSet
-import com.github.sdong.gradle.util.Utils
+import com.github.sdong.gradle.coverityfortify.config.CovEmitConfig
+import com.github.sdong.gradle.coverityfortify.config.CovEmitConfigSet
+import com.github.sdong.gradle.coverityfortify.util.Utils
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 

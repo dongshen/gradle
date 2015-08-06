@@ -1,11 +1,11 @@
-package com.github.sdong.gradle
+package com.github.sdong.gradle.coverityfortify
 
-import com.github.sdong.gradle.model.Extension
-import com.github.sdong.gradle.model.CoverityRootExtension
-import com.github.sdong.gradle.tasks.CovAnalyzeJavaTask
-import com.github.sdong.gradle.tasks.CovCommitDefectsTask
-import com.github.sdong.gradle.tasks.CovEmitJavaTask
-import com.github.sdong.gradle.tasks.ForTransJavaTask
+import com.github.sdong.gradle.coverityfortify.model.Extension
+import com.github.sdong.gradle.coverityfortify.model.CoverityRootExtension
+import com.github.sdong.gradle.coverityfortify.tasks.CovAnalyzeJavaTask
+import com.github.sdong.gradle.coverityfortify.tasks.CovCommitDefectsTask
+import com.github.sdong.gradle.coverityfortify.tasks.CovEmitJavaTask
+import com.github.sdong.gradle.coverityfortify.tasks.ForTransJavaTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 

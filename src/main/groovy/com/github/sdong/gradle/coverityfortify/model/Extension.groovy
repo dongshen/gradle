@@ -1,4 +1,4 @@
-package com.github.sdong.gradle.model
+package com.github.sdong.gradle.coverityfortify.model
 
 /**
  * The base extension that contains settings to be applied to all child projects

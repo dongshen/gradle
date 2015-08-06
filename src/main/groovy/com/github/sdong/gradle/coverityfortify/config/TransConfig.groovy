@@ -1,4 +1,4 @@
-package com.github.sdong.gradle.config
+package com.github.sdong.gradle.coverityfortify.config
 
 import org.gradle.api.file.FileCollection
 import org.gradle.api.internal.file.UnionFileCollection
@@ -10,7 +10,7 @@ import org.gradle.api.internal.file.UnionFileCollection
  *
  * @author sdong
  */
-class CovEmitConfig {
+class TranslationConfig {
     /**
      * Directories to be passed to the <code>--findsource</code> argument.
      */

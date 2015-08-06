@@ -1,4 +1,4 @@
-package com.github.sdong.gradle.config
+package com.github.sdong.gradle.coverityfortify.config
 
 import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.BasePlugin
