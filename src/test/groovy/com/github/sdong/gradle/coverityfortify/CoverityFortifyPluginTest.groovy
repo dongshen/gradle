@@ -8,6 +8,8 @@ import com.github.sdong.gradle.coverityfortify.tasks.CovEmitJavaTask
 import com.github.sdong.gradle.coverityfortify.tasks.ForTransJavaTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+
+import org.gradle.testfixtures.ProjectBuilder
 import org.testng.annotations.Test
 import static org.testng.Assert.assertEquals 
 
