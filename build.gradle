@@ -12,7 +12,7 @@ buildscript {
 apply plugin: 'groovy'
 apply plugin: 'com.gradle.plugin-publish'
 
-group = 'com.github.dongshen.gradle'
+group = 'dongshen.gradle.blob.master'
 version = '1.0.0-SNAPSHOT'
 
 description = 'A plugin for integrating with Coverity & Fortify. ' +
@@ -34,10 +34,10 @@ pluginBundle {
     website = 'https://github.com/shendong/CoverityFortify-plugin'
     vcsUrl = 'https://github.com/shendong/CoverityFortify-plugin'
     description = project.description
-    tags = ['coverity', 'java', 'android']
+    tags = ['coverity', 'fortify', 'java', 'android']
 
     plugins {
-        coverityPlugin {
+        coverityfortifyPlugin {
             id = 'com.github.sdong.gradle.coverityfortify'
             displayName = 'Gradle Coverity & Fortify Plugin'
         }
