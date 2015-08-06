@@ -11,16 +11,20 @@ import org.gradle.api.Project
 
 import org.gradle.testfixtures.ProjectBuilder
 import org.testng.annotations.Test
-import static org.testng.Assert.assertEquals 
+import static org.testng.Assert.* 
 
 class CoverityFortifyPluginTest {
 
     @Test
     public void coverityFortifyPluginAddsTaskToProject() {
-        Project project = ProjectBuilder.builder().build()
-       // project.pluginManager.apply 'com.github.sdong.gradle.coverityfortify'
-
-       // assertTrue(project.tasks.covEmitJava instanceof CovEmitJavaTask)
+       Project project = ProjectBuilder.builder().build()
+       project.pluginManager.apply 'com.github.sdong.gradle.coverityfortify'
+		
+	   System.out.println(project)
+	   def task = project.task('c4rtakstest', type: CovEmitJavaTask)
+	   assertTrue(task instanceof CovEmitJavaTask)
+	   
+       assertTrue(project.tasks.covEmitJava instanceof CovEmitJavaTask)
     }
 
 }
