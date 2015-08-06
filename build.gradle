@@ -28,6 +28,8 @@ dependencies {
     compile gradleApi()
     compile localGroovy()
     compile 'com.android.tools.build:gradle:1.0.0'
+    compile 'org.testng:testng:6.8.17'
+   // testCompile 'junit:junit:4.11'
 }
 
 pluginBundle {
@@ -60,4 +62,8 @@ compileGroovy {
     options.compilerArgs = ['-Xlint:all']
     options.deprecation = true
     options.warnings = true
+}
+
+test{
+	useTestNG()
 }
