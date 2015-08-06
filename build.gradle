@@ -38,7 +38,7 @@ pluginBundle {
 
     plugins {
         coverityPlugin {
-            id = 'com.github.dongshen.gradle.CoverityFortifyPlugin'
+            id = 'com.github.sdong.gradle.coverityfortify'
             displayName = 'Gradle Coverity & Fortify Plugin'
         }
     }
