@@ -20,10 +20,11 @@ class CoverityFortifyPluginTest {
        Project project = ProjectBuilder.builder().build()
        project.pluginManager.apply 'com.github.sdong.gradle.coverityfortify'
 		
-	   System.out.println(project)
+	   println(project)
 	   def task = project.task('c4rtakstest', type: CovEmitJavaTask)
 	   assertTrue(task instanceof CovEmitJavaTask)
-	   
+	   println(task) 
+	   println 'hello!'
        assertTrue(project.tasks.covEmitJava instanceof CovEmitJavaTask)
     }
 
