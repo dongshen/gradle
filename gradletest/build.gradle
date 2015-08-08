@@ -4,25 +4,25 @@ apply plugin: 'java'
 buildscript {
   repositories {
     maven {
-		url uri('../repo')
+		//url uri('../repo')
       //url "https://plugins.gradle.org/m2/"
-	  //url "https://github.com/"
+	  url "https://github.com/dongshen"
     }
-	 jcenter()
+	 //jcenter()
   }
   dependencies {
     //classpath "gradle.plugin.com.github.mjdetullio.gradle:coverity-plugin:1.0.3"
-	classpath group: 'com.sdong', name: 'coverityfortifyPlugin', version: '1.0.0-SNAPSHOT' 
-	classpath group: 'com.sdong',  name: 'code4ReferencePlugin',  version: '1.1-SNAPSHOT'
+	//classpath group: 'com.sdong', name: 'coverityfortifyPlugin', version: '1.0.0-SNAPSHOT' 
+	//classpath group: 'com.sdong',  name: 'code4ReferencePlugin',  version: '1.1-SNAPSHOT'
 			  
-	//classpath "dongshen.gradle.blob.master:CoverityFortify-plugin:1.0.0-SNAPSHOT"
+	classpath "gradle.blob.master:coverityfortifyPlugin:1.0.0-SNAPSHOT"
 	//compile fileTree(dir: 'lib', include: '*.jar')
   }
 }
 
 //apply plugin: "com.github.mjdetullio.gradle.coverity"
 apply plugin: "com.github.sdong.gradle.coverityfortify"
-apply plugin: "com.sdong.gradle.Code4ReferencePlugin"
+//apply plugin: "com.sdong.gradle.Code4ReferencePlugin"
  
 coverity_fortify{
 	//Coverity{
