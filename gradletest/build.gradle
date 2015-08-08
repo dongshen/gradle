@@ -3,19 +3,29 @@ apply plugin: 'java'
 
 buildscript {
   repositories {
-    maven {
+    mavenLocal()
+    //maven {
+    	
+    	//mavenCentral()	
 		//url uri('../repo')
       //url "https://plugins.gradle.org/m2/"
-	  url "https://github.com/dongshen"
-    }
-	 //jcenter()
+	  //url "https://github.com/dongshen"
+    //}
+	 jcenter()
+	 
+	// use local coverity fortify plugin: coverityfortifyPlugin-1.0.0.jar 
+	// flatDir {
+    //   dirs 'lib'
+   	//}
+	 
   }
+  
   dependencies {
     //classpath "gradle.plugin.com.github.mjdetullio.gradle:coverity-plugin:1.0.3"
-	//classpath group: 'com.sdong', name: 'coverityfortifyPlugin', version: '1.0.0-SNAPSHOT' 
+	classpath group: 'com.github.sdong.gradle', name: 'coverityfortifyPlugin', version: '1.0.0' 
 	//classpath group: 'com.sdong',  name: 'code4ReferencePlugin',  version: '1.1-SNAPSHOT'
 			  
-	classpath "gradle.blob.master:coverityfortifyPlugin:1.0.0-SNAPSHOT"
+	//classpath "gradle.blob.master:coverityfortifyPlugin:1.0.0-SNAPSHOT"
 	//compile fileTree(dir: 'lib', include: '*.jar')
   }
 }
@@ -25,8 +35,14 @@ apply plugin: "com.github.sdong.gradle.coverityfortify"
 //apply plugin: "com.sdong.gradle.Code4ReferencePlugin"
  
 coverity_fortify{
-	//Coverity{
+	coverity{
 		//COVERITY_HOME 
-		intermediateDir = "${project.buildDir}/coverity/intermediate"
-	//}
+		intermediateDir = "d:/temp/coverity/intermediate"
+	}
+	
+	fortify{
+		intermediateDir = "d:/temp/fortify/output"
+	}
+	
+	
 }

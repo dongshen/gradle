@@ -1,7 +1,8 @@
 package com.github.sdong.gradle.coverityfortify
 
-import com.github.sdong.gradle.coverityfortify.model.Extension
-import com.github.sdong.gradle.coverityfortify.model.CoverityRootExtension
+import com.github.sdong.gradle.coverityfortify.model.CoverityFortifyExtension
+import com.github.sdong.gradle.coverityfortify.model.CoverityExtension
+import com.github.sdong.gradle.coverityfortify.model.FortifyExtension
 import com.github.sdong.gradle.coverityfortify.tasks.CovAnalyzeJavaTask
 import com.github.sdong.gradle.coverityfortify.tasks.CovCommitDefectsTask
 import com.github.sdong.gradle.coverityfortify.tasks.CovEmitJavaTask
@@ -29,8 +30,10 @@ class CoverityFortifyPlugin implements Plugin<Project> {
      */
     @Override
     void apply(Project project) {
-        project.extensions.create(Extension.EXTENSION_NAME,
-                CoverityRootExtension, project)
+        project.extensions.create(CoverityFortifyExtension.EXTENSION_NAME, CoverityFortifyExtension, project)
+
+        project.coverity_fortify.extensions.create('coverity',CoverityExtension,project)
+        project.coverity_fortify.extensions.create('fortify',FortifyExtension,project)
 
         project.task('covEmitJava', type: CovEmitJavaTask)
         project.task('covAnalyzeJava', type: CovAnalyzeJavaTask,
@@ -51,9 +54,11 @@ class CoverityFortifyPlugin implements Plugin<Project> {
      */
     void configureChildProjects(Project project) {
         for (Project childProject : project.childProjects.values()) {
-            childProject.extensions.create(Extension.EXTENSION_NAME,
-                    CoverityExtension)
-
+            childProject.extensions.create(CoverityFortifyExtension.EXTENSION_NAME, CoverityFortifyExtension)
+            
+            childProject.coverity_fortify.extensions.create('coverity',CoverityExtension)
+            childProject.coverity_fortify.extensions.create('fortify',FortifyExtension)
+           
             configureChildProjects(childProject)
         }
     }

@@ -44,7 +44,7 @@ class ForTransJavaTask extends DefaultTask {
     @TaskAction
     void translation() {
         for (ProjectBuildConfig projectBuildConfig : new ProjectBuildConfigSet(project).projectBuildConfigs) {
-            // Remove source dirs that do not exist, otherwise cov-emit-java will throw an error
+            // Remove source dirs that do not exist, otherwise sourceanalyzer will throw an error
             for (Iterator<File> i = projectBuildConfig.sourceDirs.iterator(); i.hasNext();) {
                 File f = i.next();
                 if (!f.exists()) {
@@ -69,11 +69,13 @@ class ForTransJavaTask extends DefaultTask {
 
 			/*
             project.exec {
-                executable Utils.getExePath((String) project.coverity_fortify.coverityHome, 'cov-emit-java')
-                args '--dir', project.file((String) project.coverity_fortify.intermediateDir).absolutePath
-                args '--findsource', projectBuildConfig.sourceDirs.join(File.pathSeparator)
-                args '--compiler-outputs', projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)
-                args '--classpath', projectBuildConfig.classpath.asPath
+                executable Utils.getExePath((String) project.coverity_fortify.fortify.fortifyHome, 'sourceanalyzer ')
+                args '-b', (String) project.coverity_fortify.fortify.buildID
+                //args '--dir', project.file((String) project.coverity_fortify.fortify.intermediateDir).absolutePath
+                
+                //args '--compiler-outputs', projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)
+                args '-cp', projectBuildConfig.classpath.asPath
+                args '-f', projectBuildConfig.sourceDirs.join(File.pathSeparator)
                 if (additionalArgs) {
                     args additionalArgs
                 }

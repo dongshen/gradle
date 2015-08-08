@@ -68,8 +68,8 @@ class CovEmitJavaTask extends DefaultTask {
 				println 'compiler-outputs:'+ projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)
 				println '----------------------'
 				println 'sourceDirs:'+ projectBuildConfig.sourceDirs.join(File.pathSeparator)
-				
-
+				println '----------------------'
+				println project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath
 			
 			/*
             project.exec {
