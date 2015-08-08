@@ -1,7 +1,7 @@
 package com.github.sdong.gradle.coverityfortify.tasks
 
-import com.github.sdong.gradle.coverityfortify.config.CovEmitConfig
-import com.github.sdong.gradle.coverityfortify.config.CovEmitConfigSet
+import com.github.sdong.gradle.coverityfortify.config.ProjectBuildConfig
+import com.github.sdong.gradle.coverityfortify.config.ProjectBuildConfigSet
 import com.github.sdong.gradle.coverityfortify.util.Utils
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
@@ -38,15 +38,15 @@ class CovEmitJavaTask extends DefaultTask {
     }
 
     /**
-     * Task action that builds an {@link CovEmitConfigSet} for this task's project,
-     * then executes <code>cov-emit-java</code> for each {@link CovEmitConfig}.
+     * Task action that builds an {@link ProjectBuildConfigSet} for this task's project,
+     * then executes <code>cov-emit-java</code> for each {@link ProjectBuildConfig}.
      */
     @SuppressWarnings('GroovyUnusedDeclaration')
     @TaskAction
     void emit() {
-        for (CovEmitConfig emitConfig : new CovEmitConfigSet(project).emitConfigs) {
+        for (ProjectBuildConfig projectBuildConfig : new ProjectBuildConfigSet(project).projectBuildConfigs) {
             // Remove source dirs that do not exist, otherwise cov-emit-java will throw an error
-            for (Iterator<File> i = emitConfig.sourceDirs.iterator(); i.hasNext();) {
+            for (Iterator<File> i = projectBuildConfig.sourceDirs.iterator(); i.hasNext();) {
                 File f = i.next();
                 if (!f.exists()) {
                     i.remove();
@@ -60,16 +60,29 @@ class CovEmitJavaTask extends DefaultTask {
              * happen because that case probably represents a misconfiguration.
              */
 
+
+				println 'covEmitJava plugin!' 
+				println '----------------------'
+				println 'classpath:'+ projectBuildConfig.classpath.asPath
+				println '----------------------'
+				println 'compiler-outputs:'+ projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)
+				println '----------------------'
+				println 'sourceDirs:'+ projectBuildConfig.sourceDirs.join(File.pathSeparator)
+				
+
+			
+			/*
             project.exec {
-                executable Utils.getExePath((String) project.coverity.coverityHome, 'cov-emit-java')
-                args '--dir', project.file((String) project.coverity.intermediateDir).absolutePath
-                args '--findsource', emitConfig.sourceDirs.join(File.pathSeparator)
-                args '--compiler-outputs', emitConfig.compilerOutputDirs.join(File.pathSeparator)
-                args '--classpath', emitConfig.classpath.asPath
+                executable Utils.getExePath((String) project.coverity_foritfy.coverityHome, 'cov-emit-java')
+                args '--dir', project.file((String) project.coverity_foritfy.intermediateDir).absolutePath
+                args '--findsource', projectBuildConfig.sourceDirs.join(File.pathSeparator)
+                args '--compiler-outputs', projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)
+                args '--classpath', projectBuildConfig.classpath.asPath
                 if (additionalArgs) {
                     args additionalArgs
                 }
             }
+            */
         }
     }
 }

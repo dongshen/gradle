@@ -13,12 +13,12 @@ import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.plugins.JavaPluginConvention
 
 /**
- * A set of {@link TranslationConfig}s for a given project that is populated when
+ * A set of {@link ProjectBuildConfig}s for a given project that is populated when
  * constructing this type.
  *
  * @author sdong
  */
-class TranslationConfigSet {
+class ProjectBuildConfigSet {
     /**
      * The base project for this set.
      */
@@ -30,39 +30,39 @@ class TranslationConfigSet {
     Set<Project> populatedProjects
 
     /**
-     * Emit configs for base project and all its child projects (recursively),
+     * Project build configs for base project and all its child projects (recursively),
      * which are created during population.
      */
-    Set<TranslationConfig> translationConfigs
+    Set<ProjectBuildConfig> projectBuildConfigs
 
     /**
-     * Initializes and populates a new set of {@link EmitConfig}s for the given
+     * Initializes and populates a new set of {@link ProjectBuildConfig}s for the given
      * {@link Project}.
      *
-     * @param baseProject project to get a set of emit configs for
+     * @param baseProject project to get a set of Project build configs for
      */
-    TranslationConfigSet(Project baseProject) {
+    ProjectBuildConfigSet(Project baseProject) {
         this.baseProject = baseProject
         populatedProjects = []
-        translationConfigs = []
+        projectBuildConfigs = []
 
         populate(baseProject)
     }
 
     /**
-     * Recursively populates {@link EmitConfig}s for the given project, skipping
+     * Recursively populates {@link ProjectBuildConfig}s for the given project, skipping
      * those specified in their extension.  When skipped, child projects are
      * still evaluated unless it is also specified that they should not be
      * included.
      *
-     * @param project (sub)project to populate emit configs for
+     * @param project (sub)project to populate Project build configs for
      */
     void populate(Project project) {
         if (populatedProjects.contains(project)) {
             return
         }
 
-        if (!project.coverity.skip) {
+        if (!project.coverity_fortify.skip) {
             if (checkIsJavaProject(project)) {
                 populateForJava(project)
             } else if (checkIsAndroidProject(project)) {
@@ -78,7 +78,7 @@ class TranslationConfigSet {
         populatedProjects += project
 
         // Iterate child projects even if skipped
-        if (baseProject.coverity.includeChildProjects) {
+        if (baseProject.coverity_fortify.includeChildProjects) {
             for (Project childProject : project.childProjects.values()) {
                 populate(childProject)
             }
@@ -87,11 +87,11 @@ class TranslationConfigSet {
     }
 
     /**
-     * Populates the {@link EmitConfig}s for a Java project (no child projects).
+     * Populates the {@link ProjectBuildConfig}s for a Java project (no child projects).
      * One config is created per {@link org.gradle.api.tasks.SourceSet} that has
      * a Java compilation task that is part of the <code>assemble</code> task.
      *
-     * @param project project to populate emit configs for
+     * @param project project to populate Project build configs for
      */
     void populateForJava(Project project) {
         project.convention.getPlugin(JavaPluginConvention).sourceSets.each { sourceSet ->
@@ -100,7 +100,7 @@ class TranslationConfigSet {
             boolean inAssemble = taskDependenciesContainsTask(project.tasks.assemble, compileJavaTask, true)
 
             if (inAssemble) {
-                translationConfigs += new TranslationConfig().with {
+                projectBuildConfigs += new ProjectBuildConfig().with {
                     it.sourceDirs += sourceSet.allSource.srcDirs
                     it.compilerOutputDirs += sourceSet.output.files
                     it.classpath += sourceSet.compileClasspath
@@ -112,7 +112,7 @@ class TranslationConfigSet {
     }
 
     /**
-     * Populates the {@link EmitConfig}s for an Android project (no child
+     * Populates the {@link ProjectBuildConfig}s for an Android project (no child
      * projects).  One config is created per {@link BaseVariantData} that is of
      * the <code>debug</code> build type and not a test variant.
      * <p/>
@@ -120,7 +120,7 @@ class TranslationConfigSet {
      * to avoid {@link ClassNotFoundException}s and
      * {@link NoClassDefFoundError}s.
      *
-     * @param project project to populate emit configs for
+     * @param project project to populate Project build configs for
      */
     void populateForAndroid(Project project) {
         BasePlugin plugin
@@ -145,33 +145,33 @@ class TranslationConfigSet {
                 continue
             }
 
-            TranslationConfig translationConfig = new TranslationConfig()
+            ProjectBuildConfig projectBuildConfig = new ProjectBuildConfig()
 
             variantData.variantConfiguration.sortedSourceProviders.each { sourceProvider ->
-                translationConfig.sourceDirs += sourceProvider.javaDirectories
+                projectBuildConfig.sourceDirs += sourceProvider.javaDirectories
             }
 
-            translationConfig.sourceDirs +=
+            projectBuildConfig.sourceDirs +=
                     variantData.generateRClassTask.sourceOutputDir
-            translationConfig.sourceDirs +=
+            projectBuildConfig.sourceDirs +=
                     variantData.generateBuildConfigTask.sourceOutputDir
-            translationConfig.sourceDirs +=
+            projectBuildConfig.sourceDirs +=
                     variantData.aidlCompileTask.sourceOutputDir
 
             if (!variantData.variantConfiguration.renderscriptNdkModeEnabled) {
-                translationConfig.sourceDirs +=
+                projectBuildConfig.sourceDirs +=
                         variantData.renderscriptCompileTask.sourceOutputDir
             }
 
-            translationConfig.compilerOutputDirs +=
+            projectBuildConfig.compilerOutputDirs +=
                     variantData.javaCompileTask.outputs.files.files
 
-            translationConfig.classpath +=
+            projectBuildConfig.classpath +=
                     variantData.javaCompileTask.classpath
-            translationConfig.classpath +=
+            projectBuildConfig.classpath +=
                     project.files(plugin.androidBuilder.bootClasspath)
 
-            translationConfig += translationConfig
+            projectBuildConfigs += projectBuildConfig
         }
     }
 

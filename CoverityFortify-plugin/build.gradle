@@ -2,6 +2,7 @@ buildscript {
     repositories {
         maven {
             url 'https://plugins.gradle.org/m2/'
+            mavenCentral()
         }
     }
     dependencies {
@@ -11,8 +12,9 @@ buildscript {
 
 apply plugin: 'groovy'
 apply plugin: 'com.gradle.plugin-publish'
+apply plugin: 'maven'
 
-group = 'dongshen.gradle.blob.master'
+group = 'com.sdong'
 version = '1.0.0-SNAPSHOT'
 
 description = 'A plugin for integrating with Coverity & Fortify. ' +
@@ -41,7 +43,7 @@ pluginBundle {
     plugins {
         coverityfortifyPlugin {
             id = 'com.github.sdong.gradle.coverityfortify'
-            displayName = 'Gradle Coverity & Fortify Plugin'
+            displayName = 'Gradle Coverity, Fortify Plugin'
         }
     }
 }
@@ -66,4 +68,12 @@ compileGroovy {
 
 test{
 	useTestNG()
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo'))
+        }
+    }
 }
