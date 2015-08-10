@@ -28,4 +28,16 @@ class CoverityFortifyPluginTest {
        assertTrue(project.tasks.covEmitJava instanceof CovEmitJavaTask)
     }
 
+	@Test
+	public void testSourceDirs(){
+		Set<File> srcDirs = ['D:\\git\\sdong\\gradle\\gradletest\\src\\main\\java']
+		def src=''
+		srcDirs.each{
+			println 'srcDirs:'+it
+			src= src+ it + File.separator+'**'+File.separator+'*'+File.pathSeparator
+		}
+		println 'src='+src
+		println srcDirs.join(File.pathSeparator)
+		
+	}
 }

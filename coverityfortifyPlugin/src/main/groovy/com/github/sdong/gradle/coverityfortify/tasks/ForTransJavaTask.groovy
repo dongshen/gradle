@@ -62,18 +62,27 @@ class ForTransJavaTask extends DefaultTask {
 				println 'forTransJava plugin!' 
 				println '----------------------'
 				println 'classpath:'+ projectBuildConfig.classpath.asPath
+				
 				println '----------------------'
 				println 'compiler-outputs:'+ projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)
+				
 				println '----------------------'
 				println 'sourceDirs:'+ projectBuildConfig.sourceDirs.join(File.pathSeparator)
+				def src=''
+					srcDirs.each{
+						println 'srcDirs:'+it
+						src= src+ it + File.separator+'**'+File.separator+'*'+File.pathSeparator
+					}
+				
 				println '-----intermediateDir------'
 				println project.file((String) project.coverity_fortify.fortify.intermediateDir).absolutePath				
+				
 				println '-----fortifyHome---'
 				println System.getenv('FORTIFY_HOME')
-				println project.coverity_fortify.fortify.fortifyBuildId
 				println project.coverity_fortify.fortify.fortifyHome
-				println '------fortifyBuildId------'
 				
+				println '------fortifyBuildId------'
+				println project.coverity_fortify.fortify.fortifyBuildId
 
 			
             project.exec {            	
@@ -83,7 +92,7 @@ class ForTransJavaTask extends DefaultTask {
                 
                 //args '--compiler-outputs', projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)
                 args '-cp', projectBuildConfig.classpath.asPath
-                args projectBuildConfig.sourceDirs.join(File.pathSeparator)
+                args src
                 //args '-f', projectBuildConfig.sourceDirs.join(File.pathSeparator)
                 if (additionalArgs) {
                     args additionalArgs

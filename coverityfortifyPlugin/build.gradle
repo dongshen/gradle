@@ -78,6 +78,12 @@ compileGroovy {
 
 test{
 	useTestNG()
+	
+	testLogging.showStandardStreams = true
+	 
+	afterTest { desc, result -> 
+        println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
 }
 
 uploadArchives {
