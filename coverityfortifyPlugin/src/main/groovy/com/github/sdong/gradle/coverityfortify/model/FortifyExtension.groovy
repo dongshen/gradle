@@ -35,7 +35,7 @@ class FortifyExtension  {
      * Default value is the <code>FORTIFY_BUILD_ID</code> environment variable
      * (or null if the environment variable is unset).
      */
-    String buildID
+    String fortifyBuildId
 
 
     /**
@@ -46,7 +46,8 @@ class FortifyExtension  {
      */
     FortifyExtension(Project project) {
         intermediateDir = "${project.buildDir}/fortify/intermediate"
-        fortifyHome = System.getenv('FORTIFY_HOME')
-        buildID = System.getenv('FORTIFY_BUILD_ID')
+        fortifyHome = System.getenv('FORTIFY_HOME')   
+        fortifyBuildId = "fortify_buidlId"
+     
     }
 }

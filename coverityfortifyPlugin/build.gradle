@@ -1,11 +1,19 @@
 buildscript {
     repositories {
+		mavenLocal()
         maven {
             url 'https://plugins.gradle.org/m2/'
-            mavenCentral()
+		//	url 'http://10.177.28.177:8081/nexus/content/groups/public/'	
+            //mavenCentral()
         }
-        
+		
+		//flatDir {
+		//	dirs 'libs'
+		//}
+		        
         jcenter()
+
+		
     }
     dependencies {
         classpath 'com.gradle.publish:plugin-publish-plugin:0.9.1'

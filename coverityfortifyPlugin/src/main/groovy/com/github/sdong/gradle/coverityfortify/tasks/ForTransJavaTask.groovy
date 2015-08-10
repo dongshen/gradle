@@ -66,21 +66,30 @@ class ForTransJavaTask extends DefaultTask {
 				println 'compiler-outputs:'+ projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)
 				println '----------------------'
 				println 'sourceDirs:'+ projectBuildConfig.sourceDirs.join(File.pathSeparator)
+				println '-----intermediateDir------'
+				println project.file((String) project.coverity_fortify.fortify.intermediateDir).absolutePath				
+				println '-----fortifyHome---'
+				println System.getenv('FORTIFY_HOME')
+				println project.coverity_fortify.fortify.fortifyBuildId
+				println project.coverity_fortify.fortify.fortifyHome
+				println '------fortifyBuildId------'
+				
 
-			/*
-            project.exec {
+			
+            project.exec {            	
                 executable Utils.getExePath((String) project.coverity_fortify.fortify.fortifyHome, 'sourceanalyzer ')
-                args '-b', (String) project.coverity_fortify.fortify.buildID
+               // args '-b', (String) project.coverity_fortify.fortify.fortifyBuildId
                 //args '--dir', project.file((String) project.coverity_fortify.fortify.intermediateDir).absolutePath
                 
                 //args '--compiler-outputs', projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)
                 args '-cp', projectBuildConfig.classpath.asPath
-                args '-f', projectBuildConfig.sourceDirs.join(File.pathSeparator)
+                args projectBuildConfig.sourceDirs.join(File.pathSeparator)
+                //args '-f', projectBuildConfig.sourceDirs.join(File.pathSeparator)
                 if (additionalArgs) {
                     args additionalArgs
                 }
             }
-            */
+            
         }
     }
 }

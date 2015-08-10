@@ -70,11 +70,11 @@ class CovEmitJavaTask extends DefaultTask {
 				println 'sourceDirs:'+ projectBuildConfig.sourceDirs.join(File.pathSeparator)
 				println '----------------------'
 				println project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath
+				println System.getenv('COVERITY_HOME')
 			
-			/*
             project.exec {
-                executable Utils.getExePath((String) project.coverity_foritfy.coverityHome, 'cov-emit-java')
-                args '--dir', project.file((String) project.coverity_foritfy.intermediateDir).absolutePath
+                executable Utils.getExePath((String) project.coverity_fortify.coverity.coverityHome, 'cov-emit-java')
+                args '--dir', project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath
                 args '--findsource', projectBuildConfig.sourceDirs.join(File.pathSeparator)
                 args '--compiler-outputs', projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)
                 args '--classpath', projectBuildConfig.classpath.asPath
@@ -82,7 +82,7 @@ class CovEmitJavaTask extends DefaultTask {
                     args additionalArgs
                 }
             }
-            */
+            
         }
     }
 }

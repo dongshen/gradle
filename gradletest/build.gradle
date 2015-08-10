@@ -15,7 +15,7 @@ buildscript {
 	 
 	// use local coverity fortify plugin: coverityfortifyPlugin-1.0.0.jar 
 	// flatDir {
-    //   dirs 'lib'
+     //  dirs 'lib'
    	//}
 	 
   }

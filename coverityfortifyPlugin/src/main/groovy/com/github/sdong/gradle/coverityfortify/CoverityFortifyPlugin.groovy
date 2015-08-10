@@ -32,8 +32,9 @@ class CoverityFortifyPlugin implements Plugin<Project> {
     void apply(Project project) {
         project.extensions.create(CoverityFortifyExtension.EXTENSION_NAME, CoverityFortifyExtension, project)
 
+		project.coverity_fortify.extensions.create('fortify',FortifyExtension,project)
         project.coverity_fortify.extensions.create('coverity',CoverityExtension,project)
-        project.coverity_fortify.extensions.create('fortify',FortifyExtension,project)
+        
 
         project.task('covEmitJava', type: CovEmitJavaTask)
         project.task('covAnalyzeJava', type: CovAnalyzeJavaTask,
