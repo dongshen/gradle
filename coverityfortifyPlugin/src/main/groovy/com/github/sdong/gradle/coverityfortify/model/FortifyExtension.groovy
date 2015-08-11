@@ -32,11 +32,19 @@ class FortifyExtension  {
     /**
      * Specifies the Fortify Build ID used during the translate phase.
      * <p/>
-     * Default value is the <code>FORTIFY_BUILD_ID</code> environment variable
+     * Default value is the <code>fortify_buidlId</code> environment variable
      * (or null if the environment variable is unset).
      */
     String fortifyBuildId
 
+
+    /**
+     * Specifies the source java version used during the translate phase.
+     * <p/>
+     * Indicates which version of the JDK the Java code is written for. Valid values 
+     * for version are 1.3, 1.4, 1.5, 1.6 and 1.7. The default is 1.4. 
+     */
+    String sourceVersion
 
     /**
      * Instantiates a new instance of this extension.
@@ -47,6 +55,7 @@ class FortifyExtension  {
     FortifyExtension(Project project) {
         intermediateDir = "${project.buildDir}/fortify/intermediate"
         fortifyHome = System.getenv('FORTIFY_HOME')   
+        sourceVersion = "1.4"
         fortifyBuildId = "fortify_buidlId"
      
     }

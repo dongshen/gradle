@@ -17,7 +17,7 @@ class Utils {
     static String getExePath(String homeDir, String executableFileName) {
         if (homeDir != null && !homeDir.isEmpty()
                 && !homeDir.isAllWhitespace()) {
-            return "${homeDir}/bin/${executableFileName}"
+            return homeDir+File.separator+"bin"+File.separator+executableFileName
         }
 
         return executableFileName

@@ -69,30 +69,39 @@ class ForTransJavaTask extends DefaultTask {
 				println '----------------------'
 				println 'sourceDirs:'+ projectBuildConfig.sourceDirs.join(File.pathSeparator)
 				def src=''
-					srcDirs.each{
-						println 'srcDirs:'+it
-						src= src+ it + File.separator+'**'+File.separator+'*'+File.pathSeparator
-					}
+					
+	            for (Iterator<File> i = projectBuildConfig.sourceDirs.iterator(); i.hasNext();) {
+	                File f = i.next();
+	                src = f.absolutePath + File.separator+'**'+File.separator+'*.java'
+	                println src
+	                break;
+	            }					
+					println src
 				
 				println '-----intermediateDir------'
 				println project.file((String) project.coverity_fortify.fortify.intermediateDir).absolutePath				
 				
 				println '-----fortifyHome---'
-				println System.getenv('FORTIFY_HOME')
+				//println System.getenv('FORTIFY_HOME')
 				println project.coverity_fortify.fortify.fortifyHome
 				
 				println '------fortifyBuildId------'
 				println project.coverity_fortify.fortify.fortifyBuildId
 
+				println '------sourceVersion------'
+				println project.coverity_fortify.fortify.sourceVersion
+				def version = '-source ' + project.coverity_fortify.fortify.sourceVersion 
 			
             project.exec {            	
-                executable Utils.getExePath((String) project.coverity_fortify.fortify.fortifyHome, 'sourceanalyzer ')
-               // args '-b', (String) project.coverity_fortify.fortify.fortifyBuildId
-                //args '--dir', project.file((String) project.coverity_fortify.fortify.intermediateDir).absolutePath
-                
-                //args '--compiler-outputs', projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)
+                executable Utils.getExePath((String) project.coverity_fortify.fortify.fortifyHome, 'sourceanalyzer')
+                args '-b', (String) project.coverity_fortify.fortify.fortifyBuildId
+                args '--machine-output'
                 args '-cp', projectBuildConfig.classpath.asPath
-                args src
+                args '-source', (String) project.coverity_fortify.fortify.sourceVersion
+                args src 
+                
+                //args '--dir', project.file((String) project.coverity_fortify.fortify.intermediateDir).absolutePath                
+                //args '--compiler-outputs', projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)
                 //args '-f', projectBuildConfig.sourceDirs.join(File.pathSeparator)
                 if (additionalArgs) {
                     args additionalArgs
