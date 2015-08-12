@@ -15,7 +15,7 @@ Coverity &amp; Fortify gradle plugin
   
   
   dependencies {
-  
+
 		classpath group: 'com.github.sdong.gradle', name: 'coverityfortifyPlugin', version: '1.0.0' 
   }
 
