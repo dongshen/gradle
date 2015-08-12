@@ -1,5 +1,4 @@
-# gradle
-Coverity &amp; Fortify gradle plugin
+# Coverity &amp; Fortify for gradle plugin
 
 <p>You need add following line in your root build.gradle file:</p>
 
