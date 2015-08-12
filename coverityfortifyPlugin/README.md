@@ -3,17 +3,17 @@ Coverity &amp; Fortify gradle plugin
 
 <p>You need add following line in your root build.gradle file:</p>
 
+  //plugin id	
+  apply plugin: "com.github.sdong.gradle.coverityfortify"
 
-#  apply plugin: "com.github.sdong.gradle.coverityfortify"
-
-#  repositories {
+  repositories {
  		jcenter()
  	
 		//use local coverity & fortify plugin: coverityfortifyPlugin-1.0.0.jar
 		flatDir { dirs 'plugin' }	 
   }
   
-#  dependencies {
+  dependencies {
 		classpath group: 'com.github.sdong.gradle', name: 'coverityfortifyPlugin', version: '1.0.0' 
   }
 
