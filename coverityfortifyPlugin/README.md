@@ -28,6 +28,7 @@ Coverity &amp; Fortify gradle plugin
 	
 #	fortify{
 		//Fortify home, default it will get base on local environment FORTIFY_HOME
+<<<<<<< HEAD
 		fortifyHome = "d:/fortify"
 		//fortify output folder
 		intermediateDir = "d:/temp/fortify/output"
@@ -36,4 +37,14 @@ Coverity &amp; Fortify gradle plugin
 		//source version 1.4, 1.5, 1.6, 1.7, default value is 1.4
 		sourceVersion = "1.4"
 	}
+=======
+#		fortifyHome = "d:/fortify"
+		//fortify output folder
+#		intermediateDir = "d:/temp/fortify/output"
+		//build id, default value is fortify_buidlId
+#		fortifyBuildId = "Fortify_build_id"
+		//source version 1.4, 1.5, 1.6, 1.7, default value is 1.4
+#		sourceVersion = "1.4"
+#	}
+>>>>>>> branch 'master' of https://github.com/dongshen/gradle.git
 	
