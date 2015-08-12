@@ -21,16 +21,13 @@ buildscript {
   }
   
   dependencies {
-    //classpath "gradle.plugin.com.github.mjdetullio.gradle:coverity-plugin:1.0.3"
 	classpath group: 'com.github.sdong.gradle', name: 'coverityfortifyPlugin', version: '1.0.0' 
-	//classpath group: 'com.sdong',  name: 'code4ReferencePlugin',  version: '1.1-SNAPSHOT'
 			  
 	//classpath "gradle.blob.master:coverityfortifyPlugin:1.0.0-SNAPSHOT"
 	//compile fileTree(dir: 'lib', include: '*.jar')
   }
 }
 
-//apply plugin: "com.github.mjdetullio.gradle.coverity"
 apply plugin: "com.github.sdong.gradle.coverityfortify"
 //apply plugin: "com.sdong.gradle.Code4ReferencePlugin"
  
@@ -42,6 +39,8 @@ coverity_fortify{
 	
 	fortify{
 		intermediateDir = "d:/temp/fortify/output"
+		fortifyBuildId = "Fortify_build_id"
+		sourceVersion = "1.4"
 	}
 	
 	

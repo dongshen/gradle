@@ -9,8 +9,7 @@ import org.gradle.api.tasks.TaskAction
 /**
  * Runs sourceanalyzer (once per source set for Java projects, once per variant
  * for Android projects), which parses Java source code and bytecode, and saves
- * javac outputs. It stores these outputs to an emit repository for subsequent
- * static analysis and outputs it into a directory (build id) that can
+ * javac outputs. It stores these outputs into a directory (build id) that can
  * later be analyzed with <code>-scan</code>.
  *
  * @author sdong
@@ -31,8 +30,7 @@ class ForTransJavaTask extends DefaultTask {
         description = 'Runs sourceanalyzer (once per source set for Java ' +
                 'projects, once per variant for Android projects), which ' +
                 'parses Java source code and bytecode, and saves javac ' +
-                'outputs. It stores these outputs to an emit repository for ' +
-                'subsequent static analysis and outputs it into a directory ' +
+                'outputs. It stores these outputs into a directory ' +
                 'that can later be analyzed with sourceanalyzer -scan.'
     }
 
@@ -76,13 +74,12 @@ class ForTransJavaTask extends DefaultTask {
 	                println src
 	                break;
 	            }					
-					println src
+				println src
 				
 				println '-----intermediateDir------'
 				println project.file((String) project.coverity_fortify.fortify.intermediateDir).absolutePath				
 				
 				println '-----fortifyHome---'
-				//println System.getenv('FORTIFY_HOME')
 				println project.coverity_fortify.fortify.fortifyHome
 				
 				println '------fortifyBuildId------'
@@ -90,7 +87,6 @@ class ForTransJavaTask extends DefaultTask {
 
 				println '------sourceVersion------'
 				println project.coverity_fortify.fortify.sourceVersion
-				def version = '-source ' + project.coverity_fortify.fortify.sourceVersion 
 			
             project.exec {            	
                 executable Utils.getExePath((String) project.coverity_fortify.fortify.fortifyHome, 'sourceanalyzer')
@@ -100,9 +96,6 @@ class ForTransJavaTask extends DefaultTask {
                 args '-source', (String) project.coverity_fortify.fortify.sourceVersion
                 args src 
                 
-                //args '--dir', project.file((String) project.coverity_fortify.fortify.intermediateDir).absolutePath                
-                //args '--compiler-outputs', projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)
-                //args '-f', projectBuildConfig.sourceDirs.join(File.pathSeparator)
                 if (additionalArgs) {
                     args additionalArgs
                 }
