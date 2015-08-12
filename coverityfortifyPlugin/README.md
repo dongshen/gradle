@@ -17,6 +17,7 @@ Coverity &amp; Fortify gradle plugin
 		classpath group: 'com.github.sdong.gradle', name: 'coverityfortifyPlugin', version: '1.0.0' 
   }
 
+
   //extension setting for coverity & fortify plugin	  
   
   coverity_fortify{
