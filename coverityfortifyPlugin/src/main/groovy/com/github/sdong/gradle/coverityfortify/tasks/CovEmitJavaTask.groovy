@@ -83,6 +83,7 @@ class CovEmitJavaTask extends DefaultTask {
                 }
             }
             
+            
         }
     }
 }

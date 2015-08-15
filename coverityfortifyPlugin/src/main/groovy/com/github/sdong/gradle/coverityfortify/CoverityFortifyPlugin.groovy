@@ -55,10 +55,10 @@ class CoverityFortifyPlugin implements Plugin<Project> {
      */
     void configureChildProjects(Project project) {
         for (Project childProject : project.childProjects.values()) {
-            childProject.extensions.create(CoverityFortifyExtension.EXTENSION_NAME, CoverityFortifyExtension)
+            childProject.extensions.create(CoverityFortifyExtension.EXTENSION_NAME, CoverityFortifyExtension,project)
             
-            childProject.coverity_fortify.extensions.create('coverity',CoverityExtension)
-            childProject.coverity_fortify.extensions.create('fortify',FortifyExtension)
+            childProject.coverity_fortify.extensions.create('coverity',CoverityExtension,project)
+            childProject.coverity_fortify.extensions.create('fortify',FortifyExtension,project)
            
             configureChildProjects(childProject)
         }
