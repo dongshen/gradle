@@ -25,8 +25,6 @@
 	coverity{	 
 		//coverity home, default it will get base on local environment COVERITY_HOME
 		coverityHome = "d:/coverity"
-		//coverity output folder
-		intermediateDir = "d:/temp/coverity/intermediate"
 	}
 	
 	fortify{

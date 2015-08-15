@@ -34,12 +34,20 @@ apply plugin: "com.github.sdong.gradle.coverityfortify"
 coverity_fortify{
 	coverity{
 		//COVERITY_HOME 
+		coverityHome = "d:/coverity"
+		//output folder
 		intermediateDir = "d:/temp/coverity/intermediate"
 	}
 	
 	fortify{
-		intermediateDir = "d:/temp/fortify/output"
+		
+		//Fortify home, default it will get base on local environment FORTIFY_HOME
+		fortifyHome = "d:/fortify"
+		
+		//build id, default value is fortify_buidlId
 		fortifyBuildId = "Fortify_build_id"
+		
+		//source version 1.4, 1.5, 1.6, 1.7, default value is 1.4
 		sourceVersion = "1.4"
 	}
 	

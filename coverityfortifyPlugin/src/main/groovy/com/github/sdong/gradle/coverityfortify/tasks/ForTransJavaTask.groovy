@@ -74,10 +74,7 @@ class ForTransJavaTask extends DefaultTask {
 	                println src
 	                break;
 	            }					
-				println src
-				
-				println '-----intermediateDir------'
-				println project.file((String) project.coverity_fortify.fortify.intermediateDir).absolutePath				
+				println src	
 				
 				println '-----fortifyHome---'
 				println project.coverity_fortify.fortify.fortifyHome

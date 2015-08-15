@@ -9,13 +9,6 @@ import org.gradle.api.Project
  * @author sdong
  */
 class FortifyExtension  {
-    /**
-     * Specifies the directory Fortify uses during translate.
-     * <p/>
-     * Default value is
-     * <code>"${project.buildDir}/fortify/intermediate"</code>.
-     */
-    String intermediateDir
 
     /**
      * Specifies the path to your Fortify Analysis Tools root directory (leave
@@ -53,7 +46,6 @@ class FortifyExtension  {
      *                default the {@link #intermediateDir}.
      */
     FortifyExtension(Project project) {
-        intermediateDir = "${project.buildDir}/fortify/intermediate"
         fortifyHome = System.getenv('FORTIFY_HOME')   
         sourceVersion = "1.4"
         fortifyBuildId = "fortify_buidlId"
