@@ -163,11 +163,21 @@ class ProjectBuildConfigSet {
                         variantData.renderscriptCompileTask.sourceOutputDir
             }
 
-            projectBuildConfig.compilerOutputDirs +=
-                    variantData.javaCompileTask.outputs.files.files
+			if (variantData.hasProperty('javacTask')) {
+                // Android plugin 1.3.x
+                projectBuildConfig.compilerOutputDirs +=
+                        variantData.javacTask.outputs.files.files
 
-            projectBuildConfig.classpath +=
-                    variantData.javaCompileTask.classpath
+                projectBuildConfig.classpath +=
+                        variantData.javacTask.classpath
+            } else {
+                projectBuildConfig.compilerOutputDirs +=
+                        variantData.javaCompilerTask.outputs.files.files
+
+                projectBuildConfig.classpath +=
+                        variantData.javaCompilerTask.classpath
+            }
+            
             projectBuildConfig.classpath +=
                     project.files(plugin.androidBuilder.bootClasspath)
 
