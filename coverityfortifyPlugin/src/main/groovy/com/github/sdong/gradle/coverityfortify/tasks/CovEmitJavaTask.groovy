@@ -81,9 +81,13 @@ class CovEmitJavaTask extends DefaultTask {
                 if (additionalArgs) {
                     args additionalArgs
                 }
-            }
-            
-            
+            } 
+                       
+        }
+        //zip file
+        def zipFileName = (String) project.coverity_fortify.coverity.zipfile
+        if (zipFileName != null && !zipFileName.isEmpty()){
+            Utils.zipFolder(zipFileName, (String) project.coverity_fortify.coverity.intermediateDir)
         }
     }
 }

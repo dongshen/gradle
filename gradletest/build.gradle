@@ -8,7 +8,7 @@ buildscript {
 	
 	
 	dependencies {
-		classpath group: 'com.github.sdong.gradle', name: 'coverityfortifyPlugin', version: '1.0.0' 
+		classpath group: 'com.github.sdong.gradle', name: 'coverityfortifyPlugin', version: '1.1.0' 
 	}
 }	
 
@@ -18,11 +18,13 @@ coverity_fortify{
 		//COVERITY_HOME 
 		//coverityHome = "d:/coverity"
 		//output folder
-		intermediateDir = "d:/temp/coverity/intermediate"
+		intermediateDir = "d:/temp/coverityfortifyplugin/coverity"
+		zipfile = "d:/temp/coverityfortifyplugin/coverity.zip"
 	}
 	
 	fortify{
 		
+		intermediateDir = "d:/temp/coverityfortifyplugin/fortify"
 		//Fortify home, default it will get base on local environment FORTIFY_HOME
 		fortifyHome = "d:/fortify"
 		
@@ -31,6 +33,7 @@ coverity_fortify{
 		
 		//source version 1.4, 1.5, 1.6, 1.7, default value is 1.4
 		sourceVersion = "1.4"
+		zipfile =""
 	}
 	
 	

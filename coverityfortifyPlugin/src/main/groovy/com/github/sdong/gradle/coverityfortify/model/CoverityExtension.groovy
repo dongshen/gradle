@@ -73,9 +73,16 @@ class CoverityExtension  {
      * Specifies the Coverity Connect commit password.
      * <p/>
      * Default value is the <code>COVERITY_PASS</code> environment variable
-     * (or null if the environment variable is unset).
+     * (or null if the environment variable is not set).
      */
     String pass
+    
+    /**
+     * Specifies the zip file after build.
+     * <p/>
+     * Default value is null if the variable is not set.
+     */
+    String zipfile
 
     /**
      * Instantiates a new instance of this extension.
@@ -92,5 +99,6 @@ class CoverityExtension  {
         dataport = System.getenv('COVERITY_DATAPORT')
         user = System.getenv('COVERITY_USER')
         pass = System.getenv('COVERITY_PASS')
+        zipfile = ""
     }
 }

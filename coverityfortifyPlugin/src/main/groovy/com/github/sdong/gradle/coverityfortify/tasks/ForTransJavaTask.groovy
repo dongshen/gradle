@@ -98,7 +98,12 @@ class ForTransJavaTask extends DefaultTask {
                 }
             }
             
-            
+        }
+        
+        //zip file
+        def zipFileName = (String) project.coverity_fortify.fortify.zipfile
+        if (zipFileName != null && !zipFileName.isEmpty()){
+            Utils.zipFolder(zipFileName, (String) project.coverity_fortify.coverity.intermediateDir)
         }
     }
 }

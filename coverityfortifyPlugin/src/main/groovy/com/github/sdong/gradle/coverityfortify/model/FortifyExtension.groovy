@@ -23,6 +23,14 @@ class FortifyExtension  {
     String fortifyHome
 
     /**
+     * Specifies the directory Fortify uses during sourceanalyzer generate intermediate.
+     * <p/>
+     * Default value is
+     * <code>"${project.buildDir}/fortify/intermediate"</code>.
+     */
+    String intermediateDir
+    
+    /**
      * Specifies the Fortify Build ID used during the translate phase.
      * <p/>
      * Default value is the <code>fortify_buidlId</code> environment variable
@@ -40,15 +48,23 @@ class FortifyExtension  {
     String sourceVersion
 
     /**
+     * Specifies the zip file after build.
+     * <p/>
+     * Default value is null if the variable is not set.
+     */
+    String zipfile
+    
+    /**
      * Instantiates a new instance of this extension.
      *
      * @param project project this extension is applied to, which is used to
      *                default the {@link #intermediateDir}.
      */
     FortifyExtension(Project project) {
+        intermediateDir = "${project.buildDir}/fortify/intermediate"
         fortifyHome = System.getenv('FORTIFY_HOME')   
         sourceVersion = "1.4"
         fortifyBuildId = "fortify_buidlId"
-     
+        zipfile = ""
     }
 }

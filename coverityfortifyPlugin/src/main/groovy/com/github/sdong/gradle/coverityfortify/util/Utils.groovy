@@ -1,5 +1,8 @@
 package com.github.sdong.gradle.coverityfortify.util
 
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
+
 /**
  * Utility class containing static methods.
  *
@@ -21,5 +24,50 @@ class Utils {
         }
 
         return executableFileName
+    }
+    
+    /**
+     * zip all files in directory and sub-directory.
+     *
+     * @param zipFileName zip file name include file path
+     * @param inputDir zip files initial folder
+     * @return
+     *
+     */
+    static void zipFolder(String zipFileName, String inputDir) {
+
+        println("Start to zip")
+        def baseFolder = new File(inputDir).getAbsolutePath()
+        def baseFolderLength = baseFolder.length() + 1
+
+        println("Base folder: "+ baseFolder)
+        ZipOutputStream zipFile = new ZipOutputStream(new FileOutputStream(zipFileName))
+
+        zipFiles(zipFile,inputDir,baseFolderLength)
+
+        zipFile.close()
+        println("End of zip")
+    }
+
+    static void zipFiles(ZipOutputStream zipFile,String inputDir,int baseFolderLength) {
+
+        new File(inputDir).eachFile() { file ->
+
+            if(file.isDirectory()){
+                zipFiles(zipFile,file.getAbsolutePath(),baseFolderLength)
+            }else{
+                println("Zip "+file.getAbsolutePath())
+                zipFile.putNextEntry(new ZipEntry(file.getAbsolutePath().substring(baseFolderLength)))
+                def buffer = new byte[1024]
+                file.withInputStream { i ->
+                    def l = i.read(buffer)
+                    // check wether the file is empty
+                    if (l > 0) {
+                        zipFile.write(buffer, 0, l)
+                    }
+                }
+                zipFile.closeEntry()
+            }
+        }
     }
 }
