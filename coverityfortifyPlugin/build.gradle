@@ -41,7 +41,7 @@ dependencies {
     compile localGroovy()
     compile 'com.android.tools.build:gradle:1.0.0'
     //compile 'org.testng:testng:6.8.17'
-   // testCompile 'junit:junit:4.11'
+    testCompile 'junit:junit:4.11'
 }
 
 pluginBundle {

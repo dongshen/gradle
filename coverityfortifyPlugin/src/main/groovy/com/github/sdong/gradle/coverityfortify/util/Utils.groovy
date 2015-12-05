@@ -58,14 +58,7 @@ class Utils {
             }else{
                 println("Zip "+file.getAbsolutePath())
                 zipFile.putNextEntry(new ZipEntry(file.getAbsolutePath().substring(baseFolderLength)))
-                def buffer = new byte[1024]
-                file.withInputStream { i ->
-                    def l = i.read(buffer)
-                    // check wether the file is empty
-                    if (l > 0) {
-                        zipFile.write(buffer, 0, l)
-                    }
-                }
+                zipFile << new FileInputStream(file)
                 zipFile.closeEntry()
             }
         }
