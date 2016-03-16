@@ -72,15 +72,30 @@ class CovEmitJavaTask extends DefaultTask {
 				println project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath
 				println System.getenv('COVERITY_HOME')
 			
-            project.exec {
-                executable Utils.getExePath((String) project.coverity_fortify.coverity.coverityHome, 'cov-emit-java')
-                args '--dir', project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath
-                args '--findsource', projectBuildConfig.sourceDirs.join(File.pathSeparator)
-                args '--compiler-outputs', projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)
-                args '--classpath', projectBuildConfig.classpath.asPath
-                if (additionalArgs) {
-                    args additionalArgs
-                }
+			//check debugMode
+    			def debugMode = (String) project.coverity_fortify.coverity.debugMode
+                if (debugMode != null && debugMode.compareToIgnoreCase('true') == 0 ){
+                    project.exec {
+                        executable Utils.getExePath((String) project.coverity_fortify.coverity.coverityHome, 'cov-emit-java')
+                        args '--dir', project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath
+                        args '--findsource', projectBuildConfig.sourceDirs.join(File.pathSeparator)
+                        args '--no-compiler-outputs'
+                        args '--classpath', projectBuildConfig.classpath.asPath
+                        if (additionalArgs) {
+                            args additionalArgs
+                        }
+                    }
+                 } else {
+                    project.exec {
+                        executable Utils.getExePath((String) project.coverity_fortify.coverity.coverityHome, 'cov-emit-java')
+                        args '--dir', project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath
+                        args '--findsource', projectBuildConfig.sourceDirs.join(File.pathSeparator)
+                        args '--compiler-outputs', projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)
+                        args '--classpath', projectBuildConfig.classpath.asPath
+                        if (additionalArgs) {
+                            args additionalArgs
+                        }
+                 }
             } 
                        
         }

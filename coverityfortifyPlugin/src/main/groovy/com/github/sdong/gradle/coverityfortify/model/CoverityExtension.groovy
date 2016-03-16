@@ -83,6 +83,13 @@ class CoverityExtension  {
      * Default value is null if the variable is not set.
      */
     String zipfile
+    
+    /**
+     * Specifies the gradle debug mode.
+     * <p/>
+     * Default value is null if the variable is not set.
+     */
+    String debugMode
 
     /**
      * Instantiates a new instance of this extension.
@@ -100,5 +107,6 @@ class CoverityExtension  {
         user = System.getenv('COVERITY_USER')
         pass = System.getenv('COVERITY_PASS')
         zipfile = ""
+        debugMode = ""
     }
 }

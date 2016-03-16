@@ -170,6 +170,13 @@ class ProjectBuildConfigSet {
 
                 projectBuildConfig.classpath +=
                         variantData.javacTask.classpath
+            } else if (variantData.hasProperty('javaCompileTask')) {
+                // Android plugin < 1.3.x
+                projectBuildConfig.compilerOutputDirs +=
+                        variantData.javaCompileTask.outputs.files.files
+
+                projectBuildConfig.classpath +=
+                        variantData.javaCompileTask.classpath                
             } else {
                 projectBuildConfig.compilerOutputDirs +=
                         variantData.javaCompilerTask.outputs.files.files
@@ -178,10 +185,19 @@ class ProjectBuildConfigSet {
                         variantData.javaCompilerTask.classpath
             }
             
-            projectBuildConfig.classpath +=
-                    project.files(plugin.androidBuilder.bootClasspath)
+            
+            if (plugin.androidBuilder.hasProperty('bootClasspath')) {
+                // Android plugin < 1.5.x                     
+                projectBuildConfig.classpath +=
+                        project.files(plugin.androidBuilder.bootClasspath)
+            } else {
+                // Android plugin 1.5.x
+                projectBuildConfig.classpath +=
+                        project.files(plugin.androidBuilder.getBootClasspath(true))            
+            }
 
             projectBuildConfigs += projectBuildConfig
+                      
         }
     }
 
