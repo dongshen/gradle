@@ -34,7 +34,7 @@ class CoverityFortifyPluginTest {
 		def src=''
 		srcDirs.each{
 			println 'srcDirs:'+it
-			src= src+ it + File.separator+'**'+File.separator+'*'+File.pathSeparator
+			src= src+ it + File.separator+'**/*.java'
 		}
 		println 'src='+src
 		println srcDirs.join(File.pathSeparator)

@@ -8,14 +8,14 @@
   repositories {
  		jcenter()
  	
-		//use local coverity & fortify plugin: coverityfortifyPlugin-1.1.0.jar
+		//use local coverity & fortify plugin: coverityfortifyPlugin-1.2.0.jar
 		flatDir { dirs 'plugin' }	 
   }
   
   
   dependencies {
 
-		classpath group: 'com.github.sdong.gradle', name: 'coverityfortifyPlugin', version: '1.1.0' 
+		classpath group: 'com.github.sdong.gradle', name: 'coverityfortifyPlugin', version: '1.2.0' 
   }
 
 
@@ -25,6 +25,8 @@
 	coverity{	 
 		//coverity home, default it will get base on local environment COVERITY_HOME
 		coverityHome = "d:/coverity"
+		//debug mode will not generate class
+		debugMode = "false"
 	}
 	
 	fortify{

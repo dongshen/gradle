@@ -70,11 +70,10 @@ class ForTransJavaTask extends DefaultTask {
 					
 	            for (Iterator<File> i = projectBuildConfig.sourceDirs.iterator(); i.hasNext();) {
 	                File f = i.next();
-	                src = f.absolutePath + File.separator+'**'+File.separator+'*.java'
-	                println src
-	                break;
+	                src = f.absolutePath + File.separator+'**/*.java'
+	               // break;
 	            }					
-				println src	
+				println 'sourceDirs with java' + src	
 				
 				println '-----fortifyHome---'
 				println project.coverity_fortify.fortify.fortifyHome
