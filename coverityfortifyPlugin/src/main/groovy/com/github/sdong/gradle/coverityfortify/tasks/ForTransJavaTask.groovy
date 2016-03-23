@@ -71,7 +71,7 @@ class ForTransJavaTask extends DefaultTask {
 	            for (Iterator<File> i = projectBuildConfig.sourceDirs.iterator(); i.hasNext();) {
 	                File f = i.next();
 	                src = f.absolutePath + File.separator+'**/*.java'
-	               // break;
+	                break;
 	            }					
 				println 'sourceDirs with java' + src	
 				
