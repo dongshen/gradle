@@ -40,4 +40,5 @@ class CoverityFortifyPluginTest {
 		println srcDirs.join(File.pathSeparator)
 		
 	}
+	 
 }

@@ -37,7 +37,7 @@ class Utils {
     static void zipFolder(String zipFileName, String inputDir) {
 
         println("Start to zip")
-        def baseFolder = new File(inputDir).getAbsolutePath()
+        def baseFolder = new File(inputDir).getAbsolutePath().replace('\\', '/')
         def baseFolderLength = baseFolder.length() + 1
 
         println("Base folder: "+ baseFolder)
@@ -54,13 +54,44 @@ class Utils {
         new File(inputDir).eachFile() { file ->
 
             if(file.isDirectory()){
-                zipFiles(zipFile,file.getAbsolutePath(),baseFolderLength)
+                zipFiles(zipFile,file.getAbsolutePath().replace('\\', '/'),baseFolderLength)
             }else{
-                println("Zip "+file.getAbsolutePath())
-                zipFile.putNextEntry(new ZipEntry(file.getAbsolutePath().substring(baseFolderLength)))
+                println("Zip "+file.getAbsolutePath().replace('\\', '/'))
+                zipFile.putNextEntry(new ZipEntry(file.getAbsolutePath().replace('\\', '/').substring(baseFolderLength)))
                 zipFile << new FileInputStream(file)
                 zipFile.closeEntry()
             }
         }
+    }
+    
+
+    
+    static File zip( String destination, String inputDir, Closure<Boolean> filter)  {
+
+        File self = new File(inputDir)
+        def zipOutput = new ZipOutputStream(new FileOutputStream(destination))
+        final root = self.absolutePath - self.name
+
+        def addToZipOutput = { File f, String path ->
+            zipOutput.putNextEntry(new ZipEntry(path ? path + File.separator + f.name : f.name))
+            zipOutput.write(f.bytes)
+            zipOutput.closeEntry()
+        }
+
+        zipOutput.withStream {
+            if (self.isDirectory())  {
+                self.eachFileRecurse(FileType.FILES) {
+                    if( filter == null || filter( it ) ) {
+                        addToZipOutput(it, (it.absolutePath - it.name) - root)
+                    }
+                }
+            } else {
+                if( filter == null || filter( it ) ) {
+                    addToZipOutput(self, "")
+                }
+            }
+        }
+
+        destination
     }
 }

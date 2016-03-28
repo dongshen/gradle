@@ -71,7 +71,8 @@ class ForTransJavaTask extends DefaultTask {
 	            for (Iterator<File> i = projectBuildConfig.sourceDirs.iterator(); i.hasNext();) {
 	                File f = i.next();
 	                if(f.exists() && f.directory && !(f.list() as List).empty){
-	                	src = f.absolutePath + File.separator+'**/*'
+	                	src = f.absolutePath 
+	                	//+ File.separator+'**/*'
 	                	break;
 	                }else{
 	                	break;
