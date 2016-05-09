@@ -69,8 +69,23 @@ class CovEmitJavaTask extends DefaultTask {
 				println '----------------------'
 				println 'sourceDirs:'+ projectBuildConfig.sourceDirs.join(File.pathSeparator)
 				println '----------------------'
-				println project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath
-				println System.getenv('COVERITY_HOME')
+				println 'IntermediateDir = ' + project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath
+				println 'COVERITY_HOME = ' +System.getenv('COVERITY_HOME')
+				
+			//check java file in soureDirs
+			def hasJavaFile = false
+			 for (Iterator<File> i = projectBuildConfig.sourceDirs.iterator(); i.hasNext();) {
+                    File f = i.next();
+                    hasJavaFile = checkJavaFile(f)
+                    if(hasJavaFile){
+                        break;
+                    }
+             }	
+             
+             if (hasJavaFile == false){
+                println 'source folder is empty for Java files, skip it'
+                continue
+             }		
 			
 			//check debugMode
     			def debugMode = (String) project.coverity_fortify.coverity.debugMode

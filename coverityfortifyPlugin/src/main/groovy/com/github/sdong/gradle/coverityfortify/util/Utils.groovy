@@ -2,6 +2,7 @@ package com.github.sdong.gradle.coverityfortify.util
 
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
+import groovy.io.FileType.FILES
 
 /**
  * Utility class containing static methods.
@@ -25,6 +26,27 @@ class Utils {
 
         return executableFileName
     }
+    
+    /**
+     * check all files in directory and sub-directory.
+     *
+     * @param File
+     * @return
+     *
+     */
+    static boolean checkJavaFile(File dir){
+        def hasJavaFile = false
+              
+        dir.eachFileRecurse (FILES) { 
+            if(it.name.endsWith('.java')) {
+                hasJavaFile = true
+                break
+            }
+        }
+        
+        return hasJavaFile
+    }
+    
     
     /**
      * zip all files in directory and sub-directory.

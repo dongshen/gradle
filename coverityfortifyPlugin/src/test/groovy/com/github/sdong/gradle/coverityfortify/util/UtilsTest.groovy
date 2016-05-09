@@ -11,12 +11,21 @@ import org.testng.annotations.Test
 public class UtilsTest {
 
 	@Test
-	public void testZipFolder() {
-		def zipFileName = "D:/temp/logs.zip"
-		def inputDir = "D:/temp/logs"
-		Utils.zipFolder( zipFileName,  inputDir)
+	public void testCheckJavaFile() {
+		def FileName = "D:/temp/backupsrc/main/java"
+
+		def hasJavaFile = Utils.checkJavaFile( new File(FileName))
+		println 'hasJavaFile='+hasJavaFile
 		//fail("Not yet implemented");
 	}
+	
+	@Test
+    public void testZipFolder() {
+        def zipFileName = "D:/temp/logs.zip"
+        def inputDir = "D:/temp/logs"
+        Utils.zipFolder( zipFileName,  inputDir)
+        //fail("Not yet implemented");
+    }
 	
 	@Test
 	public void testCheckFolderEmpty(){
