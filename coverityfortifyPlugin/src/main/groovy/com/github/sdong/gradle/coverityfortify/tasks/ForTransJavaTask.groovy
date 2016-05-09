@@ -70,15 +70,15 @@ class ForTransJavaTask extends DefaultTask {
 					
 	            for (Iterator<File> i = projectBuildConfig.sourceDirs.iterator(); i.hasNext();) {
 	                File f = i.next();
-	                if(f.exists() && f.directory && !(f.list() as List).empty){
+	                if(checkJavaFile(f)){
 	                	src = f.absolutePath 
-	                	//+ File.separator+'**/*'
 	                	break;
 	                }else{
 	                	break;
 	                }
 	            }
 	            if(!src?.trim()){
+	                println 'source folder is empty for Java files, skip it'
 	            	continue
 	            }					
 				println 'sourceDirs with java' + src	

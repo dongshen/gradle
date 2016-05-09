@@ -12,11 +12,19 @@ public class UtilsTest {
 
 	@Test
 	public void testCheckJavaFile() {
-		def FileName = "D:/temp/backupsrc/main/java"
+		def FileName = 'D:/temp/backup/src/main/java/'
 
-		def hasJavaFile = Utils.checkJavaFile( new File(FileName))
+		def hasJavaFile = false 
+		
+		hasJavaFile = Utils.checkJavaFile(new File(FileName))
 		println 'hasJavaFile='+hasJavaFile
+		
+		FileName = 'D:/temp/backup/src/main/resources'
+		hasJavaFile = Utils.checkJavaFile(new File(FileName))
+        println 'hasJavaFile='+hasJavaFile
+		
 		//fail("Not yet implemented");
+		
 	}
 	
 	@Test

@@ -2,7 +2,7 @@ package com.github.sdong.gradle.coverityfortify.util
 
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
-import groovy.io.FileType.FILES
+import static groovy.io.FileType.FILES
 
 /**
  * Utility class containing static methods.
@@ -36,11 +36,11 @@ class Utils {
      */
     static boolean checkJavaFile(File dir){
         def hasJavaFile = false
-              
-        dir.eachFileRecurse (FILES) { 
-            if(it.name.endsWith('.java')) {
-                hasJavaFile = true
-                break
+        if( dir.exists() ) {
+            dir.eachFileRecurse (FILES) { 
+                if(it.name.endsWith('.java')) {
+                    hasJavaFile = true
+                }
             }
         }
         
