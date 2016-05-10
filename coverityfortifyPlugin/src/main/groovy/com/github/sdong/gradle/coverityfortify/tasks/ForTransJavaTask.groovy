@@ -67,31 +67,33 @@ class ForTransJavaTask extends DefaultTask {
 				println '----------------------'
 				println 'sourceDirs:'+ projectBuildConfig.sourceDirs.join(File.pathSeparator)
 				def src=''
-					
-	            for (Iterator<File> i = projectBuildConfig.sourceDirs.iterator(); i.hasNext();) {
-	                File f = i.next();
-	                if(checkJavaFile(f)){
-	                	src = f.absolutePath 
-	                	break;
-	                }else{
-	                	break;
-	                }
-	            }
-	            if(!src?.trim()){
-	                println 'source folder is empty for Java files, skip it'
-	            	continue
-	            }					
-				println 'sourceDirs with java' + src	
-				
+					           
+	            //filter out folder without java file in soureDirs
+                def hasJavaFile = false
+                 for (Iterator<File> i = projectBuildConfig.sourceDirs.iterator(); i.hasNext();) {
+                        File f = i.next();
+                        hasJavaFile = Utils.checkJavaFile(f)
+                        if(hasJavaFile && !src?.trim()){
+                            src = f.absolutePath 
+                        } else if (hasJavaFile){
+                            src = src+':'+f.absolutePath
+                        }
+                 }  
+                            					              
 				println '-----fortifyHome---'
-				println project.coverity_fortify.fortify.fortifyHome
+				println 'fortifyHome: ' + project.coverity_fortify.fortify.fortifyHome
 				
 				println '------fortifyBuildId------'
-				println project.coverity_fortify.fortify.fortifyBuildId
+				println 'fortifyBuildId: ' + project.coverity_fortify.fortify.fortifyBuildId
 
 				println '------sourceVersion------'
-				println project.coverity_fortify.fortify.sourceVersion
+				println 'sourceVersion: ' + project.coverity_fortify.fortify.sourceVersion
 			
+			    println 'sourceDirs with java' + src    
+                if(!src?.trim()){
+                    println 'source folder is empty for Java files, skip it'
+                    continue
+                }
             project.exec {            	
                 executable Utils.getExePath((String) project.coverity_fortify.fortify.fortifyHome, 'sourceanalyzer')
                 args '-b', (String) project.coverity_fortify.fortify.fortifyBuildId

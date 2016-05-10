@@ -76,7 +76,7 @@ class CovEmitJavaTask extends DefaultTask {
 			def hasJavaFile = false
 			 for (Iterator<File> i = projectBuildConfig.sourceDirs.iterator(); i.hasNext();) {
                     File f = i.next();
-                    hasJavaFile = checkJavaFile(f)
+                    hasJavaFile = Utils.checkJavaFile(f)
                     if(hasJavaFile){
                         break;
                     }
