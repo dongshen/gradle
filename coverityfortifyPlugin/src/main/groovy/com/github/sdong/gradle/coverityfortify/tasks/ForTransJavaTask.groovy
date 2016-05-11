@@ -74,9 +74,9 @@ class ForTransJavaTask extends DefaultTask {
                         File f = i.next();
                         hasJavaFile = Utils.checkJavaFile(f)
                         if(hasJavaFile && !src?.trim()){
-                            src = f.absolutePath 
+                            src = '"'+f.absolutePath+'"' 
                         } else if (hasJavaFile){
-                            src = src+':'+f.absolutePath
+                            src = src+' "'+f.absolutePath+'"'
                         }
                  }  
                             					              
@@ -89,11 +89,14 @@ class ForTransJavaTask extends DefaultTask {
 				println '------sourceVersion------'
 				println 'sourceVersion: ' + project.coverity_fortify.fortify.sourceVersion
 			
-			    println 'sourceDirs with java' + src    
+			    println 'sourceDirs with java: ' + src    
                 if(!src?.trim()){
                     println 'source folder is empty for Java files, skip it'
                     continue
                 }
+                
+                println 'Run Fortify Command:'+ Utils.getExePath((String) project.coverity_fortify.fortify.fortifyHome, 'sourceanalyzer') +' -b '+(String) project.coverity_fortify.fortify.fortifyBuildId +' --machine-output' + ' -cp ' + projectBuildConfig.classpath.asPath +' -source ' + (String) project.coverity_fortify.fortify.sourceVersion+' '+src
+                
             project.exec {            	
                 executable Utils.getExePath((String) project.coverity_fortify.fortify.fortifyHome, 'sourceanalyzer')
                 args '-b', (String) project.coverity_fortify.fortify.fortifyBuildId

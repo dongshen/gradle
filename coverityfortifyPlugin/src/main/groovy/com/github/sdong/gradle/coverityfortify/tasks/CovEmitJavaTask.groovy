@@ -90,6 +90,8 @@ class CovEmitJavaTask extends DefaultTask {
 			//check debugMode
     			def debugMode = (String) project.coverity_fortify.coverity.debugMode
                 if (debugMode != null && debugMode.compareToIgnoreCase('true') == 0 ){
+                    println = 'Run Coverity Command:'+Utils.getExePath((String) project.coverity_fortify.coverity.coverityHome, 'cov-emit-java')+' --dir '+ project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath+' --findsource ' + projectBuildConfig.sourceDirs.join(File.pathSeparator) +' --no-compiler-outputs '+' --classpath '+ projectBuildConfig.classpath.asPath
+                
                     project.exec {
                         executable Utils.getExePath((String) project.coverity_fortify.coverity.coverityHome, 'cov-emit-java')
                         args '--dir', project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath
@@ -101,6 +103,7 @@ class CovEmitJavaTask extends DefaultTask {
                         }
                     }
                  } else {
+                    println = 'Run Coverity Command:'+Utils.getExePath((String) project.coverity_fortify.coverity.coverityHome, 'cov-emit-java')+' --dir '+ project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath+' --findsource ' + projectBuildConfig.sourceDirs.join(File.pathSeparator) +' --compiler-outputs '+ projectBuildConfig.compilerOutputDirs.join(File.pathSeparator)+' --classpath '+ projectBuildConfig.classpath.asPath
                     project.exec {
                         executable Utils.getExePath((String) project.coverity_fortify.coverity.coverityHome, 'cov-emit-java')
                         args '--dir', project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath
