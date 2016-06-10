@@ -3,8 +3,6 @@ package com.github.sdong.gradle.coverityfortify
 import com.github.sdong.gradle.coverityfortify.model.CoverityFortifyExtension
 import com.github.sdong.gradle.coverityfortify.model.CoverityExtension
 import com.github.sdong.gradle.coverityfortify.model.FortifyExtension
-import com.github.sdong.gradle.coverityfortify.tasks.CovAnalyzeJavaTask
-import com.github.sdong.gradle.coverityfortify.tasks.CovCommitDefectsTask
 import com.github.sdong.gradle.coverityfortify.tasks.CovEmitJavaTask
 import com.github.sdong.gradle.coverityfortify.tasks.ForTransJavaTask
 import org.gradle.api.Plugin
@@ -37,10 +35,6 @@ class CoverityFortifyPlugin implements Plugin<Project> {
         
 
         project.task('covEmitJava', type: CovEmitJavaTask)
-        project.task('covAnalyzeJava', type: CovAnalyzeJavaTask,
-                dependsOn: project.tasks.covEmitJava)
-        project.task('covCommitDefects', type: CovCommitDefectsTask,
-                dependsOn: project.tasks.covAnalyzeJava)
                 
         project.task('forTransJava', type: ForTransJavaTask)        
 
