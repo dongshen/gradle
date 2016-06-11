@@ -6,16 +6,16 @@
   apply plugin: "com.github.sdong.gradle.coverityfortify"
 
   repositories {
- 		jcenter()
- 	
-		//use local coverity & fortify plugin: coverityfortifyPlugin-1.2.0.jar
+  
+        jcenter()
+		//use local coverity & fortify plugin. 
 		flatDir { dirs 'plugin' }	 
   }
   
   
   dependencies {
 
-		classpath group: 'com.github.sdong.gradle', name: 'coverityfortifyPlugin', version: '1.2.0' 
+		classpath group: 'com.github.sdong.gradle', name: 'coverityfortifyPlugin', version: '1.2.1' 
   }
 
 
@@ -45,5 +45,6 @@
 		//zip file name,this is optional parameter
 		zipfile = "fortify.zip"
 	}
-
+	
+}
 	
