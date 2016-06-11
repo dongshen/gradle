@@ -6,7 +6,7 @@ You need follow the guide to setup the plugin in root build.gradle file and set 
 
 After setup this plugin, you can use command `gradle task` to check whether the plugin is setup properly. You will find 2 new task in task list, `covEmitJava` is for tools `Coverity` and `forTransJava` is tools `Fortify`.  
 
-![](https://github.com/dongshen/gradle/tree/master/coverityfortifyPlugin/release/task.jpg) 
+![GitHub](https://github.com/dongshen/gradle/blob/master/coverityfortifyPlugin/release/task.jpg?raw=true) 
 
 You can use following command to generate intermediate file for Coverity and Fortify: <br>
 * Both for `Coverity` and `Fortify`: `gradle clean assemble covEmitJava forTransJava` <br>
