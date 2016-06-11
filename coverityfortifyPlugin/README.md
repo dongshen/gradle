@@ -1,8 +1,22 @@
 # Coverity &amp; Fortify for gradle plugin
 
-<p>You need add following line in your root build.gradle file:</p>
+This gradle plugin will help you to generate  intermediate file for static scan tools `Coverity` and `Fortify`. 
 
-  //plugin id	
+You need follow the guide to setup the plugin in root build.gradle file and set related parameter which will be used for `Coverity` and `Fortify` to generate intermediate file.
+
+After setup this plugin, you can use command `gradle task` to check whether the plugin is setup properly. You will find 2 new task in task list, `covEmitJava` is for tools `Coverity` and `forTransJava` is tools `Fortify`.  
+
+![](https://github.com/dongshen/gradle/tree/master/coverityfortifyPlugin/release/task.jpg) 
+
+You can use following command to generate intermediate file for Coverity and Fortify: <br>
+* Both for `Coverity` and `Fortify`: `gradle clean assemble covEmitJava forTransJava` <br>
+* Only for `Coverity`: `gradle clean assemble covEmitJava` <br>
+* Only for `Fortify`: `gradle clean assemble forTransJava` <br>
+
+
+# Plugin Setting in build.gradle
+
+  //plugin id <br>	
   apply plugin: "com.github.sdong.gradle.coverityfortify"
 
   repositories {

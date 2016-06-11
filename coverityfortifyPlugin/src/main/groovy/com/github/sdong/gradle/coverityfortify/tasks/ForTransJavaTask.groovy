@@ -27,11 +27,11 @@ class ForTransJavaTask extends DefaultTask {
      */
     ForTransJavaTask() {
         group = 'Fortify'
-        description = 'Runs sourceanalyzer (once per source set for Java ' +
-                'projects, once per variant for Android projects), which ' +
+        description = 'Runs Fortify command sourceanalyzer for Java ' +
+                'projects or Android projects, which ' +
                 'parses Java source code and bytecode, and saves javac ' +
-                'outputs. It stores these outputs into a directory ' +
-                'that can later be analyzed with sourceanalyzer -scan.'
+                'outputs. It stores these intermediate outputs into a directory ' +
+                'that can be analyzed with sourceanalyzer -scan.'
     }
 
     /**

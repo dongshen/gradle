@@ -28,13 +28,11 @@ class CovEmitJavaTask extends DefaultTask {
      */
     CovEmitJavaTask() {
         group = 'Coverity'
-        description = 'Runs cov-emit-java (once per source set for Java ' +
-                'projects, once per variant for Android projects), which ' +
+        description = 'Runs Coverity command cov-emit-java for Java ' +
+                'projects or Android projects, which ' +
                 'parses Java source code and bytecode, and saves javac ' +
-                'outputs. It stores these outputs to an emit repository for ' +
-                'subsequent static analysis and outputs it into a directory ' +
-                '(emit repository) that can later be analyzed with ' +
-                'cov-analyze-java.'
+                'outputs. It stores these intermediate outputs into a directory ' +
+                'that can be analyzed with cov-analyze-java.'
     }
 
     /**
