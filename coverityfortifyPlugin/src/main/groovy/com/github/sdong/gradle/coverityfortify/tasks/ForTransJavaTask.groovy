@@ -99,6 +99,7 @@ class ForTransJavaTask extends DefaultTask {
             project.exec {            	
                 executable Utils.getExePath((String) project.coverity_fortify.fortify.fortifyHome, 'sourceanalyzer')
                 args '-b', (String) project.coverity_fortify.fortify.fortifyBuildId
+				args '-Dcom.fortify.sca.ProjectRoot='+(String) project.coverity_fortify.fortify.intermediateDir
                 args '--machine-output'
                 args '-cp', projectBuildConfig.classpath.asPath
                 args '-source', (String) project.coverity_fortify.fortify.sourceVersion

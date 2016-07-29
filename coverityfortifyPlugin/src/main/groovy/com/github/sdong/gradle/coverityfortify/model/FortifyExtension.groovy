@@ -43,7 +43,7 @@ class FortifyExtension  {
      * Specifies the source java version used during the translate phase.
      * <p/>
      * Indicates which version of the JDK the Java code is written for. Valid values 
-     * for version are 1.3, 1.4, 1.5, 1.6 and 1.7. The default is 1.4. 
+     * for version are 1.3, 1.4, 1.5, 1.6, 1.7 and 1.8. The default is 1.4. 
      */
     String sourceVersion
 

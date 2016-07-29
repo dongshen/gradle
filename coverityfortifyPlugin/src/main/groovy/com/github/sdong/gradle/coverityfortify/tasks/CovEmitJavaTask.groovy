@@ -69,7 +69,9 @@ class CovEmitJavaTask extends DefaultTask {
 				println '----------------------'
 				println 'IntermediateDir = ' + project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath
 				println 'COVERITY_HOME = ' +System.getenv('COVERITY_HOME')
-				
+				println '------sourceVersion------'
+				println 'sourceVersion: ' + project.coverity_fortify.coverity.sourceVersion
+			
 			//check java file in soureDirs
 			def hasJavaFile = false
 			 for (Iterator<File> i = projectBuildConfig.sourceDirs.iterator(); i.hasNext();) {
@@ -88,11 +90,12 @@ class CovEmitJavaTask extends DefaultTask {
 			//check debugMode
     			def debugMode = (String) project.coverity_fortify.coverity.debugMode
                 if (debugMode != null && debugMode.compareToIgnoreCase('true') == 0 ){
-                    println 'Run Coverity Command:'+Utils.getExePath((String) project.coverity_fortify.coverity.coverityHome, 'cov-emit-java')+' --dir '+ project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath+' --findsource ' + projectBuildConfig.sourceDirs.join(File.pathSeparator) +' --no-compiler-outputs '+' --classpath '+ projectBuildConfig.classpath.asPath
+                    println 'Run Coverity Command:'+Utils.getExePath((String) project.coverity_fortify.coverity.coverityHome, 'cov-emit-java')+' --dir '+ project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath+' --source ' + (String) project.coverity_fortify.coverity.sourceVersion+' --findsource ' + projectBuildConfig.sourceDirs.join(File.pathSeparator) +' --no-compiler-outputs '+' --classpath '+ projectBuildConfig.classpath.asPath
                 
                     project.exec {
                         executable Utils.getExePath((String) project.coverity_fortify.coverity.coverityHome, 'cov-emit-java')
                         args '--dir', project.file((String) project.coverity_fortify.coverity.intermediateDir).absolutePath
+						args '--source',(String) project.coverity_fortify.coverity.sourceVersion
                         args '--findsource', projectBuildConfig.sourceDirs.join(File.pathSeparator)
                         args '--no-compiler-outputs'
                         args '--classpath', projectBuildConfig.classpath.asPath

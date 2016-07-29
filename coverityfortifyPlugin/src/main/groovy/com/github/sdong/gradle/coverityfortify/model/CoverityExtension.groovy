@@ -76,6 +76,14 @@ class CoverityExtension  {
      * (or null if the environment variable is not set).
      */
     String pass
+	
+	/**
+	 * Specifies the source java version used during the translate phase.
+	 * <p/>
+	 * Indicates which version of the JDK the Java code is written for. Valid values
+	 * for version are 1.3, 1.4, 1.5, 1.6, 1.7 and 1.8. The default is 1.4.
+	 */
+	String sourceVersion
     
     /**
      * Specifies the zip file after build.
@@ -99,6 +107,7 @@ class CoverityExtension  {
      */
     CoverityExtension(Project project) {
         intermediateDir = "${project.buildDir}/coverity/intermediate"
+		sourceVersion = "1.4"
         coverityHome = System.getenv('COVERITY_HOME')
         stream = System.getenv('COVERITY_STREAM')
         host = System.getenv('COVERITY_HOST')
