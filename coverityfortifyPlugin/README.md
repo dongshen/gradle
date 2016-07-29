@@ -41,6 +41,8 @@ You can use following command to generate intermediate file for Coverity and For
 		coverityHome = "d:/coverity"
 		//coverity intermeditate output directory
 		intermediateDir = "d:/cov_tmp"
+        //source version 1.4, 1.5, 1.6, 1.7,1.8 default value is 1.4
+        sourceVersion = "1.4"		
 		//debug mode will not generate class
 		debugMode = "false"
 		//zip file name, this is optional parameter
