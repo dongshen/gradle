@@ -13,6 +13,9 @@ You can use following command to generate intermediate file for Coverity and For
 * Only for `Coverity`: `gradle clean assemble covEmitJava` <br>
 * Only for `Fortify`: `gradle clean assemble forTransJava` <br>
 
+#Build
+gradle clean assemble
+
 
 # Plugin Setting in build.gradle
 
@@ -29,7 +32,7 @@ You can use following command to generate intermediate file for Coverity and For
   
   dependencies {
 
-		classpath group: 'com.github.sdong.gradle', name: 'coverityfortifyPlugin', version: '1.2.1' 
+		classpath group: 'com.github.sdong.gradle', name: 'coverityfortifyPlugin', version: '1.2.3' 
   }
 
 

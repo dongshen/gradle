@@ -94,12 +94,13 @@ class ForTransJavaTask extends DefaultTask {
                     continue
                 }
                 
-                println 'Run Fortify Command:'+ Utils.getExePath((String) project.coverity_fortify.fortify.fortifyHome, 'sourceanalyzer') +' -b '+(String) project.coverity_fortify.fortify.fortifyBuildId +' --machine-output' + ' -cp ' + projectBuildConfig.classpath.asPath +' -source ' + (String) project.coverity_fortify.fortify.sourceVersion+' '+sourceList
+                println 'Run Fortify Command:'+ Utils.getExePath((String) project.coverity_fortify.fortify.fortifyHome, 'sourceanalyzer') +' -b '+(String) project.coverity_fortify.fortify.fortifyBuildId +' -encoding UTF-8 --machine-output' + ' -cp ' + projectBuildConfig.classpath.asPath +' -source ' + (String) project.coverity_fortify.fortify.sourceVersion+' '+sourceList
                 
             project.exec {            	
                 executable Utils.getExePath((String) project.coverity_fortify.fortify.fortifyHome, 'sourceanalyzer')
                 args '-b', (String) project.coverity_fortify.fortify.fortifyBuildId
 				args '-Dcom.fortify.sca.ProjectRoot='+(String) project.coverity_fortify.fortify.intermediateDir
+				args '-encoding','UTF-8'
                 args '--machine-output'
                 args '-cp', projectBuildConfig.classpath.asPath
                 args '-source', (String) project.coverity_fortify.fortify.sourceVersion
